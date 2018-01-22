@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @chat_room.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @chat_room.user %>
+</p>
+
+<div id="messages" data-chat-room-id="<%= @chat_room.id %>">
+  <%= render @chat_room.messages %>
+</div>
+
+<%= render 'messages/form', message: @message %>
+
+<%= link_to 'Back', chat_rooms_path %>
