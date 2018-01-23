@@ -26,7 +26,11 @@ class AvatarsController < ApplicationController
   # POST /avatars
   # POST /avatars.json
   def create
-    data = JSON.parse(request.body.read)
+    p "mah params" + params.to_s
+    p request.body.read
+     data = JSON.parse(request.body.read)
+    p "mah data" + data.to_s
+   
     params = data["avatar"]
     params[:name] = current_user.name
     p params
@@ -34,6 +38,7 @@ class AvatarsController < ApplicationController
 
     if @avatar.save
       p "Success!"
+      @avatar.id.to_json
     end
   end
 

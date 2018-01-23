@@ -18,7 +18,7 @@ jQuery(document).on('turbolinks:load', function() {
 
   (function(){
     var game = new Game(App_game_channel);
-    game.createPlayer(playername);
+    game.createPlayer(playerAvatar);
     game.draw();
     game.start();
   })();

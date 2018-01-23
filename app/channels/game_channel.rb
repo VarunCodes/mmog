@@ -8,7 +8,10 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def send_move(data)
-  	p data
-    current_user.avatars.create!(data['move'])
-  end
+  	params = JSON.parse(data["move"])
+    avatar = Avatar.find(params['id'])
+    avatar.attributes = params
+    avatar.save
+  end 
+
 end

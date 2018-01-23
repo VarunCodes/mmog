@@ -15,8 +15,8 @@ Game.prototype.draw = function() {
   this.interface.draw(this.board)
 }
 
-Game.prototype.createPlayer = function(name) {
-  this.player = new Avatar(500, 500, name)
+Game.prototype.createPlayer = function(avatar) {
+  this.player = avatar
   this.board.addAvatar(this.player)
 }
 
