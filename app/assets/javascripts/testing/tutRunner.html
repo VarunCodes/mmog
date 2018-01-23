@@ -1,0 +1,58 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Metal Mania' rel='stylesheet'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./tut/tutstyle.css">
+
+<title>Tut</title>
+</head>
+
+<header>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-3" align="right">
+      <img src="./tut/tank.png" width="60%" style="padding: 10px;">
+    </div>
+    <div class="col-sm-6 title">
+      <h1>Tut.</h1>
+    </div>
+    <div class="col-sm-3">
+    </div>
+  </div>
+</div>
+</header>
+
+<body>
+
+  <form><input id = 'specname' type = 'text'><input type = 'button' onclick = 'runSpec()' value = "Run Spec"></form>
+
+<div class="row">
+  <div class="col-sm-3">
+  </div>
+  <div class="col-sm-6">
+    <div class="container-flex testbody">
+      <div id="tests" class="tests"></div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+  </div>
+</div>
+
+  <!-- tut -->
+  <script src="./tut/tester.js"></script>
+
+  <!-- src -->
+  <script src="./lib/arrayExt.js"></script>
+  <script src="./models/tile.js"></script>
+  <script src="./models/unit.js"></script>
+  <script src="./models/player.js"></script>
+  <script src="./models/board.js"></script>
+  <script src="./models/battle.js"></script>
+
+  <!-- spec -->
+  <script src="./spec/ArrayExt_spec.js"></script>
+  
+</body>
+
+</html>
