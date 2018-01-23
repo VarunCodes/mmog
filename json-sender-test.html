@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <button id="Button">Test</button>
+  </body>
+  <script>
+    document.getElementById("Button").addEventListener("click", function (){
+      var xhr = new XMLHttpRequest();
+      var stuff = { avatar: { xPos: 50, yPos: 50 }}
+      var data = JSON.stringify(stuff);
+      xhr.open('GET', "http://localhost:3000/avatars", true);
+      xhr.send();
+    })
+  </script>
+</html>

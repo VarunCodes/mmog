@@ -9,6 +9,6 @@ class GameChannel < ApplicationCable::Channel
 
   def send_move(data)
   	p data
-    # current_user.moves.create!(body: data['move'])
+    current_user.avatars.create!(data['move'])
   end
 end

@@ -1,5 +1,7 @@
 class AvatarsController < ApplicationController
   before_action :set_avatar, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create]
+
 
   # GET /avatars
   # GET /avatars.json
@@ -25,19 +27,13 @@ class AvatarsController < ApplicationController
   # POST /avatars.json
   def create
     data = JSON.parse(request.body.read)
-    p data
-    @avatar = current_user.avatars.build(data["avatar"], current_user.name)
-    p data
+    params = data["avatar"]
+    params[:name] = current_user.name
+    p params
+    @avatar = current_user.avatars.build(params)
 
-    respond_to do |format|
-      if @avatar.save
-        p "Success!"
-        format.html { redirect_to @avatar, notice: 'Avatar was successfully created.' }
-        format.json { render :show, status: :created, location: @avatar }
-      else
-        format.html { render :new }
-        format.json { render json: @avatar.errors, status: :unprocessable_entity }
-      end
+    if @avatar.save
+      p "Success!"
     end
   end
 
