@@ -1,17 +1,26 @@
+jQuery(document).on('turbolinks:load', function() {
+  console.log('called')
+  var App_game_channel;
+  App_game_channel = App.cable.subscriptions.create({
+    channel: "GameChannel"
+  }, {
+      connected: function() {},
+      disconnected: function() {},
+      received: function(data) {
+        console.log(data)
+      },
+    send_move: function(move) {
+        return this.perform('send_move', {
+          move: move,
+      });
+    }
+  });
 
-App_global_chat = App.cable.subscriptions.create({
-  channel: "ChatRoomsChannel",
-  chat_room_id: moves.data('chat-room-id')
-}, {
-  connected: function() {},
-  disconnected: function() {},
-  received: function(data) {
-    // return moves.append(data['move']);
-  },
-send_move: function(move, chat_room_id) {
-    return this.perform('send_move', {
-      move: move,
-      chat_room_id: chat_room_id
-    });
-  }
-});
+  (function(){
+    var game = new Game(App_game_channel);
+    game.createPlayer(playername);
+    game.draw();
+    game.start();
+  })();
+
+})

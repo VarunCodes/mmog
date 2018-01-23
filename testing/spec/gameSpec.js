@@ -7,7 +7,7 @@ var mockBoard = {
   updateAvatars: function(arg){this.added = true},
   added: false
 }
-mygame = new Game(mockBoard,mockInterface)
+mygame = new Game(null,mockBoard,mockInterface)
 describe("game#draw",[
   it("calls the interface.draw method",[
     mygame.draw(),
