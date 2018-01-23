@@ -14,10 +14,9 @@ jQuery(document).on 'turbolinks:load', ->
       disconnected: ->
 
       received: (data) ->
-        console.log('message received')
-        console.log(data)
         messages.append data['message']
-        
+        messages_to_bottom()
+
 
       send_message: (message, chat_room_id) ->
         @perform 'send_message', message: message, chat_room_id: chat_room_id
