@@ -17,3 +17,32 @@ Game.prototype.createPlayer = function(name) {
   this.player = new Avatar(500, 500, name)
   this.board.addAvatar(this.player)
 }
+
+Game.prototype.movePlayer = function(){
+
+
+
+  if (this.interface.leftPressed){
+  	this.player.move(-1,0)
+  }
+  if (this.interface.rightPressed){
+  	this.player.move(1,0)
+  }
+  if (this.interface.upPressed){
+  	this.player.move(0,-1)
+  }
+  if (this.interface.downPressed){
+  	this.player.move(0,1)
+  }
+}
+tick = function(game){
+	game.movePlayer();
+	game.draw();	
+}
+
+Game.prototype.start = function(){
+	var game = this
+	setInterval(function(){tick(game)}, 10)
+}
+
+

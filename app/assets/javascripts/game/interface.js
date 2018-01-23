@@ -8,6 +8,8 @@ function Interface() {
 Interface.prototype.draw = function(board) {
   var canvas = document.getElementById('game-board-canvas')
   var context = canvas.getContext("2d")
+  context.font = '30px Ariel'
+  context.clearRect(0, 0, canvas.width, canvas.height)
   for(var i=0;i<board.avatars.length;i++) {
     var avatar = board.avatars[i]
     context.fillStyle = avatar.colour;
@@ -15,35 +17,37 @@ Interface.prototype.draw = function(board) {
     context.arc(avatar.xPos, avatar.yPos, 40, 0, 2*Math.PI);
     context.closePath();
     context.fill();
+    context.fillStyle = 'black'
+    context.fillText(avatar.name,avatar.xPos - 20, avatar.yPos)
   }
 }
 
 Interface.prototype.addKeyHandlers = function() {
+  setupKeysHandlers(this)
+}
+
+setupKeysHandlers = function(interface){
   document.addEventListener('keydown', function() {
     if(event.keyCode == 37) {
-      this.leftPressed = true
-      console.log('left down')
+      interface.leftPressed = true
     } else if(event.keyCode == 38) {
-      this.upPressed = true
-      console.log('up down')
+      interface.upPressed = true
     } else if(event.keyCode == 39) {
-      this.rightPressed = true
+      interface.rightPressed = true
     } else if(event.keyCode == 40) {
-      this.downPressed = true
+      interface.downPressed = true
     }
   })
 
   document.addEventListener('keyup', function() {
     if(event.keyCode == 37) {
-      this.leftPressed = false
-      console.log('left up')
+      interface.leftPressed = false
     } else if(event.keyCode == 38) {
-      this.upPressed = false
-      console.log('up up')
+      interface.upPressed = false
     } else if(event.keyCode == 39) {
-      this.rightPressed = false
+      interface.rightPressed = false
     } else if(event.keyCode == 40) {
-      this.downPressed = false
+      interface.downPressed = false
     }
   })
 }
