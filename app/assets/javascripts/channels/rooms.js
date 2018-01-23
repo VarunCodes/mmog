@@ -13,8 +13,6 @@ jQuery(document).on('turbolinks:load', function() {
       connected: function() {},
       disconnected: function() {},
       received: function(data) {
-        console.log('message received');
-        console.log(data);
         return messages.append(data['message']);
       },
       send_message: function(message, chat_room_id) {
