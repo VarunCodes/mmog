@@ -12,6 +12,7 @@ class GameChannel < ApplicationCable::Channel
     avatar = Avatar.find(params['id'])
     avatar.attributes = params
     avatar.save
+    ActionCable.server.broadcast "game_channel", Avatar.all.to_json
   end 
 
 end
