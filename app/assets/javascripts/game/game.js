@@ -17,7 +17,6 @@ Game.prototype.updateGameState = function(data) {
   		state[i]['name'],
   		state[i]['id']))
   }
-  console.log(avatars)
   this.board.updateAvatars(avatars)
   this.board.addAvatar(this.player)
 }
