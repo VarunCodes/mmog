@@ -8,7 +8,18 @@ function Game(channel,board = new Board(), myinterface = new Interface()) {
 }
 
 Game.prototype.updateGameState = function(data) {
-  this.board.updateAvatars(data)
+  state = JSON.parse(data)
+  avatars = []
+  for(i = 0; i< state.length; i++) {
+  	avatars.push(new Avatar(
+  		state[i]['xPos'],
+  		state[i]['yPos'],
+  		state[i]['name'],
+  		state[i]['id']))
+  }
+  console.log(avatars)
+  this.board.updateAvatars(avatars)
+  this.board.addAvatar(this.player)
 }
 
 Game.prototype.draw = function() {

@@ -7,7 +7,7 @@ jQuery(document).on('turbolinks:load', function() {
       connected: function() {},
       disconnected: function() {},
       received: function(data) {
-        console.log(data)
+        game.updateGameState(data)
       },
     send_move: function(move) {
         return this.perform('send_move', {
@@ -17,7 +17,7 @@ jQuery(document).on('turbolinks:load', function() {
   });
 
   (function(){
-    var game = new Game(App_game_channel);
+    game = new Game(App_game_channel);
     game.createPlayer(playerAvatar);
     game.draw();
     game.start();
