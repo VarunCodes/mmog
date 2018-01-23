@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :avatars
   resources :messages
   resources :chat_rooms, only: [:new, :create, :show, :index]
   devise_for :users
