@@ -5,6 +5,7 @@ jQuery(document).on('turbolinks:load', function() {
     messages_to_bottom = function() {
       return messages.scrollTop(messages.prop("scrollHeight"));
     };
+
     messages_to_bottom();
     App_global_chat = App.cable.subscriptions.create({
       channel: "ChatRoomsChannel",
@@ -17,13 +18,14 @@ jQuery(document).on('turbolinks:load', function() {
         console.log(data);
         return messages.append(data['message']);
       },
-      send_message: function(message, chat_room_id) {
+    send_message: function(message, chat_room_id) {
         return this.perform('send_message', {
           message: message,
           chat_room_id: chat_room_id
         });
       }
     });
+
     return $('#new_message').submit(function(e) {
       var $this, textarea;
       $this = $(this);
