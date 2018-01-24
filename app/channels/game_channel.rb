@@ -19,6 +19,8 @@ class GameChannel < ApplicationCable::Channel
   def send_move(data)
   	params = JSON.parse(data["move"])
   	# p $game.players
+    $game.send_move(params)
+
     avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
     # p "avatar = " + avatar[0].to_s
     # unless avatar

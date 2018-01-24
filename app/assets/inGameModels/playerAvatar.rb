@@ -3,4 +3,9 @@ class PlayerAvatar
   def initialize mystuff
   	@params = mystuff
   end
+
+  def move(x,y)
+  	@params[xPos] += x
+  	@params[yPos] += y
+  end
 end
