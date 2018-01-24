@@ -14,7 +14,7 @@ Interface.prototype.draw = function(board) {
     var avatar = board.avatars[i]
     context.fillStyle = avatar.colour;
     context.beginPath();
-    context.arc(avatar.xPos, avatar.yPos, 40, 0, 2*Math.PI);
+    context.arc(avatar.xPos, avatar.yPos, avatar.size, 0, 2*Math.PI);
     context.closePath();
     context.fill();
     context.fillStyle = 'black'

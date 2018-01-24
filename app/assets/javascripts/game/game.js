@@ -1,4 +1,4 @@
-function Game(channel,board = new Board(), myinterface = new Interface()) {
+function Game(channel,board = new Board(1200,600), myinterface = new Interface()) {
   this.board = board
   this.interface = myinterface
   this.interface.addKeyHandlers()

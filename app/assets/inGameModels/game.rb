@@ -5,13 +5,13 @@ class Game
    
   	timer(0.02){ 
       ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
-      p "broadcasting!!!------------" + @players.to_s
-      p self
+      # p "broadcasting!!!------------" + @players.to_s
+      # p self
     }
   end
   def add avatar
     @players << PlayerAvatar.new({id: avatar.id, name: avatar.name, colour: avatar.colour, xPos: avatar.xPos, yPos: avatar.yPos })
-    p @players
+    # p @players
   end
 
   def remove id
@@ -25,7 +25,7 @@ private
   def timer (time)
   	Thread.new{
 	  loop do
-	    p "loop"
+	    # p "loop"
   	    sleep time
   	    yield
 	  end

@@ -1,7 +1,8 @@
-function Avatar(xPos, yPos, name, id) {
+function Avatar(xPos, yPos, name, id, size) {
   this.xPos = xPos
   this.yPos = yPos
   this.name = name
+  this.size = size
   this.id = id
   this.colour = 'yellow'
 }
