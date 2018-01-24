@@ -2,8 +2,8 @@ function Game(channel,board = new Board(1200,600), myinterface = new Interface()
   this.board = board
   this.interface = myinterface
   this.interface.addKeyHandlers()
-  this.player;
   this.channel = channel;
+  this.speed = 2
 
 }
 
@@ -15,10 +15,11 @@ Game.prototype.updateGameState = function(data) {
   		state[i]['xPos'],
   		state[i]['yPos'],
   		state[i]['name'],
-  		state[i]['id']))
+  		state[i]['id'], 40,
+  		state[i]['colour'] ))
   }
   this.board.updateAvatars(avatars)
-  this.board.addAvatar(this.player)
+  this.board.addAvatar(this.board.player)
 }
 
 Game.prototype.draw = function() {
@@ -26,30 +27,30 @@ Game.prototype.draw = function() {
 }
 
 Game.prototype.createPlayer = function(avatar) {
-  this.player = avatar
-  this.board.addAvatar(this.player)
+  this.board.player = avatar
+  this.board.addAvatar(this.board.player)
 }
 
 Game.prototype.sendMov = function(){
-  this.channel.send_move(this.player.to_json())
+  this.channel.send_move(this.board.player.to_json())
 }
 
 Game.prototype.movePlayer = function(){
 
   if (this.interface.leftPressed){
-  	this.player.move(-2,0)
+  	this.board.move(-this.speed,0) 
   	this.sendMov()
   }
   if (this.interface.rightPressed){
-  	this.player.move(2,0)
+  	this.board.move(this.speed,0)
   	this.sendMov()
   }
   if (this.interface.upPressed){
-  	this.player.move(0,-2)
+  	this.board.move(0,-this.speed)
   	this.sendMov()
   }
   if (this.interface.downPressed){
-  	this.player.move(0,2)
+  	this.board.move(0,this.speed)
   	this.sendMov()
   }
 }

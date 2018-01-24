@@ -28,6 +28,7 @@ class GameChannel < ApplicationCable::Channel
     # 	@game.players.push avatar
     # 	avatar.save
     # end
+
      # avatar[0].params[:xPos] = params['xPos']
      # avatar[0].params[:yPos] = params['yPos']
 
