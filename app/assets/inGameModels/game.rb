@@ -6,10 +6,11 @@ class Game
   	timer(0.02){tick}
   end
   def send_move(move)
+    p move
     avatar = @players.select{|pavatar|pavatar.params[:id] == move['id']}
-
-    avatar[0].params[:xPos] = params['xPos']
-    avatar[0].params[:yPos] = params['yPos']
+    p avatar
+    avatar[0].params[:xPos] = move['xPos']
+    avatar[0].params[:yPos] = move['yPos']
   end 
 
   def add avatar
@@ -26,7 +27,7 @@ class Game
   
 private
   def tick
-    ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
+    # ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
   end
 
   def timer (time)

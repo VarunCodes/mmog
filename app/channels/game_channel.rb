@@ -21,15 +21,15 @@ class GameChannel < ApplicationCable::Channel
   	# p $game.players
     $game.send_move(params)
 
-    avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
+    # avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
     # p "avatar = " + avatar[0].to_s
     # unless avatar
     # 	avatar = Avatar.new(params)
     # 	@game.players.push avatar
     # 	avatar.save
     # end
-     avatar[0].params[:xPos] = params['xPos']
-     avatar[0].params[:yPos] = params['yPos']
+     # avatar[0].params[:xPos] = params['xPos']
+     # avatar[0].params[:yPos] = params['yPos']
 
     # avatar.save
     # p @game.players
