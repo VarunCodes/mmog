@@ -37,19 +37,19 @@ Game.prototype.sendMov = function(){
 Game.prototype.movePlayer = function(){
 
   if (this.interface.leftPressed){
-  	this.player.move(-1,0)
+  	this.player.move(-2,0)
   	this.sendMov()
   }
   if (this.interface.rightPressed){
-  	this.player.move(1,0)
+  	this.player.move(2,0)
   	this.sendMov()
   }
   if (this.interface.upPressed){
-  	this.player.move(0,-1)
+  	this.player.move(0,-2)
   	this.sendMov()
   }
   if (this.interface.downPressed){
-  	this.player.move(0,1)
+  	this.player.move(0,2)
   	this.sendMov()
   }
 }
@@ -60,7 +60,7 @@ tick = function(game){
 
 Game.prototype.start = function(){
 	var game = this
-	setInterval(function(){tick(game)}, 10)
+	setInterval(function(){tick(game)}, 20)
 }
 
 
