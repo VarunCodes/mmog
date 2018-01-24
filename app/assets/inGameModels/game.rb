@@ -9,13 +9,15 @@ class Game
     p move
     avatar = @players.select{|pavatar|pavatar.params[:id] == move['id']}
     p avatar
-    avatar[0].params[:xPos] = move['xPos']
-    avatar[0].params[:yPos] = move['yPos']
+    if avatar.check_against(move['xPos'],move['yPos'])
+      avatar[0].params[:xPos] = move['xPos']
+      avatar[0].params[:yPos] = move['yPos']
+      avatar[0].params[:colour] = move['colour']
+    end
   end 
 
   def add avatar
     @players << PlayerAvatar.new({id: avatar.id, name: avatar.name, colour: avatar.colour, xPos: avatar.xPos, yPos: avatar.yPos })
-    # p @players
   end
 
   def remove id
@@ -27,16 +29,16 @@ class Game
   
 private
   def tick
-    # ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
+    ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
   end
 
   def timer (time)
   	Thread.new{
 	  loop do
-	    # p "loop"
   	    sleep time
   	    yield
 	  end
  	}
   end
+
 end
