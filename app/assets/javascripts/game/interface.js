@@ -1,8 +1,5 @@
-function Interface() {
-  this.leftPressed = false
-  this.upPressed = false
-  this.rightPressed = false
-  this.downPressed = false
+function Interface(game) {
+  this.game = game
 };
 
 Interface.prototype.draw = function(board) {
@@ -20,4 +17,20 @@ Interface.prototype.draw = function(board) {
     context.fillStyle = 'black'
     context.fillText(avatar.name,avatar.xPos - 20, avatar.yPos)
   }
+}
+
+Interface.prototype.addKeyHandlers = function() {
+  this.setupKeysHandlers()
+}
+
+Interface.prototype.setupKeysHandlers = function(){
+  this.setEventHandler('keyup', false)
+  this.setEventHandler('keydown', true)
+}
+
+Interface.prototype.setEventHandler = function(keyEvent, change) {
+  document.addEventListener(keyEvent, function() {
+    var keyCode = determineKeyPress(game.board.player, change);
+    game.sendMove(keyCode.toString(), change)
+  })
 }

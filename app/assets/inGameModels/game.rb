@@ -1,10 +1,10 @@
-class Game 
+class Game
 
   def initialize
-  	@players = [] 
-   
-  	timer(0.02){ 
-      ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
+  	@players = []
+
+  	timer(0.02){
+      # ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
       # p "broadcasting!!!------------" + @players.to_s
       # p self
     }
@@ -20,7 +20,7 @@ class Game
 
   attr_accessor :players
 
-  
+
 private
   def timer (time)
   	Thread.new{
