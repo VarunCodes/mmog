@@ -1,18 +1,20 @@
+require_relative 'timer'
+
 class Game 
 
   def initialize
   	@players = [] 
-   
-  	timer(0.02){tick}
+    timer = Timer.new {tick}
+  	timer.start(0.02)
   end
   def send_move(move)
     p move
-    avatar = @players.select{|pavatar|pavatar.params[:id] == move['id']}
+    avatar = @players.select{|pavatar|pavatar.params[:id] == move['id']}[0]
     p avatar
     if avatar.check_against(move['xPos'],move['yPos'])
-      avatar[0].params[:xPos] = move['xPos']
-      avatar[0].params[:yPos] = move['yPos']
-      avatar[0].params[:colour] = move['colour']
+      avatar.params[:xPos] = move['xPos']
+      avatar.params[:yPos] = move['yPos']
+      avatar.params[:colour] = move['colour']
     end
   end 
 
@@ -32,13 +34,6 @@ private
     ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
   end
 
-  def timer (time)
-  	Thread.new{
-	  loop do
-  	    sleep time
-  	    yield
-	  end
- 	}
-  end
+  
 
 end

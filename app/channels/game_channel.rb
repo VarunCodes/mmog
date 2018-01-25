@@ -1,5 +1,5 @@
 require_relative '../assets/inGameModels/game'
-require_relative '../assets/inGameModels/playerAvatar'
+require_relative '../assets/inGameModels/player_avatar'
 
 class GameChannel < ApplicationCable::Channel
   
