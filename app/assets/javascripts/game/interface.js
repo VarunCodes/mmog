@@ -26,28 +26,31 @@ Interface.prototype.addKeyHandlers = function() {
   setupKeysHandlers(this)
 }
 
-setupKeysHandlers = function(interface){
+// Interface.prototype.addEventListener = function(){
+//
+// }
+setupKeysHandlers = function(myinterface) {
   document.addEventListener('keydown', function() {
     if(event.keyCode == 37) {
-      interface.leftPressed = true
+      myinterface.leftPressed = true
     } else if(event.keyCode == 38) {
-      interface.upPressed = true
+      myinterface.upPressed = true
     } else if(event.keyCode == 39) {
-      interface.rightPressed = true
+      myinterface.rightPressed = true
     } else if(event.keyCode == 40) {
-      interface.downPressed = true
+      myinterface.downPressed = true
     }
   })
 
   document.addEventListener('keyup', function() {
     if(event.keyCode == 37) {
-      interface.leftPressed = false
+      myinterface.leftPressed = false
     } else if(event.keyCode == 38) {
-      interface.upPressed = false
+      myinterface.upPressed = false
     } else if(event.keyCode == 39) {
-      interface.rightPressed = false
+      myinterface.rightPressed = false
     } else if(event.keyCode == 40) {
-      interface.downPressed = false
+      myinterface.downPressed = false
     }
   })
 }
