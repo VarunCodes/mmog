@@ -1,4 +1,11 @@
-function Avatar(xPos, yPos, name, id, size, colour = randomColour()) {
+randomColour = function(){
+  randomnum =Math.floor((Math.random()* 5))
+  colours = ["yellow","red","blue","green","orange"]
+  return colours[randomnum]
+}
+
+function Avatar(xPos, yPos, name, id, size, colour) {
+  colour = colour || randomColour()
   this.xPos = xPos
   this.yPos = yPos
   this.name = name
@@ -15,10 +22,3 @@ Avatar.prototype.move = function(xCoord, yCoord) {
 Avatar.prototype.to_json = function(){
 	return JSON.stringify(this)
 }
-
-randomColour = function(){
-  randomnum =Math.floor((Math.random()* 5))
-  colours = ["yellow","red","blue","green","orange"]
-  return colours[randomnum]
-}
-

@@ -1,4 +1,6 @@
-function Game(channel,board = new Board(1200,600), myinterface = new Interface()) {
+function Game(channel,board, myinterface) {
+  board = board || new Board(1200,600)
+  myinterface = myinterface || new Interface()
   this.board = board
   this.interface = myinterface
   this.interface.addKeyHandlers()
@@ -38,7 +40,7 @@ Game.prototype.sendMov = function(){
 Game.prototype.movePlayer = function(){
 
   if (this.interface.leftPressed){
-  	this.board.move(-this.speed,0) 
+  	this.board.move(-this.speed,0)
   	this.sendMov()
   }
   if (this.interface.rightPressed){
@@ -56,12 +58,10 @@ Game.prototype.movePlayer = function(){
 }
 tick = function(game){
 	game.movePlayer();
-	game.draw();	
+	game.draw();
 }
 
 Game.prototype.start = function(){
 	var game = this
 	setInterval(function(){tick(game)}, 20)
 }
-
-
