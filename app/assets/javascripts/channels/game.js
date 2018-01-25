@@ -18,6 +18,7 @@ jQuery(document).on('turbolinks:load', function() {
 
   (function(){
     game = new Game(App_game_channel);
+    game.addKeyHandlers(game.interface)
     game.createPlayer(playerAvatar);
     game.draw();
     game.start();

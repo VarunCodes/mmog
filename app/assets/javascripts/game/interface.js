@@ -21,36 +21,3 @@ Interface.prototype.draw = function(board) {
     context.fillText(avatar.name,avatar.xPos - 20, avatar.yPos)
   }
 }
-
-Interface.prototype.addKeyHandlers = function() {
-  setupKeysHandlers(this)
-}
-
-// Interface.prototype.addEventListener = function(){
-//
-// }
-setupKeysHandlers = function(myinterface) {
-  document.addEventListener('keydown', function() {
-    if(event.keyCode == 37) {
-      myinterface.leftPressed = true
-    } else if(event.keyCode == 38) {
-      myinterface.upPressed = true
-    } else if(event.keyCode == 39) {
-      myinterface.rightPressed = true
-    } else if(event.keyCode == 40) {
-      myinterface.downPressed = true
-    }
-  })
-
-  document.addEventListener('keyup', function() {
-    if(event.keyCode == 37) {
-      myinterface.leftPressed = false
-    } else if(event.keyCode == 38) {
-      myinterface.upPressed = false
-    } else if(event.keyCode == 39) {
-      myinterface.rightPressed = false
-    } else if(event.keyCode == 40) {
-      myinterface.downPressed = false
-    }
-  })
-}
