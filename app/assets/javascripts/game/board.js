@@ -11,6 +11,7 @@ Board.prototype.updateAvatars = function(avatars){
   this.avatars = avatars
 }
 Board.prototype.move = function(x,y){
+
 	if ((this.player.xPos + x - this.player.size > 0) &&
 	 (this.player.xPos + x + this.player.size < this.xSize) &&
 	 (this.player.yPos + y - this.player.size > 0) && 

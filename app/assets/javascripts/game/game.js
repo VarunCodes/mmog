@@ -1,6 +1,6 @@
-function Game(channel,board = new Board(1200,600), myinterface = new Interface()) {
-  this.board = board
-  this.interface = myinterface
+function Game(channel, board, myinterface) {
+  this.board = board || new Board(1200,600)
+  this.interface = myinterface || new Interface()
   this.interface.addKeyHandlers()
   this.channel = channel;
   this.speed = 2
@@ -38,6 +38,7 @@ Game.prototype.sendMov = function(){
 Game.prototype.movePlayer = function(){
 
   if (this.interface.leftPressed){
+   // this.interface.leftPressed = false
   	this.board.move(-this.speed,0) 
   	this.sendMov()
   }

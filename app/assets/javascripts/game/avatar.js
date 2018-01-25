@@ -1,10 +1,10 @@
-function Avatar(xPos, yPos, name, id, size, colour = randomColour()) {
+function Avatar(xPos, yPos, name, id, size, colour) {
   this.xPos = xPos
   this.yPos = yPos
   this.name = name
   this.size = size
   this.id = id
-  this.colour = colour
+  this.colour = colour || randomColour()
 }
 
 Avatar.prototype.move = function(xCoord, yCoord) {
