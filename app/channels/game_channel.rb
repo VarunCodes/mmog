@@ -18,7 +18,7 @@ class GameChannel < ApplicationCable::Channel
 
   def send_move(data)
   	params = JSON.parse(data["move"])
-    p params
+    # p params
     ActionCable.server.broadcast "game_channel", params.to_json
   	# p $game.players
     # avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
@@ -35,6 +35,20 @@ class GameChannel < ApplicationCable::Channel
     # avatar.save
     # p @game.players
     # ActionCable.server.broadcast "game_channel", Avatar.all.to_json
+  end
+
+  def send_position(data)
+    params = JSON.pase(data['position'])
+    avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
+    unless avatar
+    	avatar = Avatar.new(params)
+    	$game.players.push avatar
+    	avatar.save
+    end
+    avatar[0].params[:xPos] = params['xPos']
+    avatar[0].params[:yPos] = params['yPos']
+    avatar[0].params[:colour] = params['colour']
+    p $game.players
   end
 
 

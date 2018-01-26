@@ -7,11 +7,17 @@ jQuery(document).on('turbolinks:load', function() {
       connected: function() {},
       disconnected: function() {},
       received: function(data) {
-        game.getMove(data)
+        game.getUpdates(data)
       },
     send_move: function(move) {
         return this.perform('send_move', {
           move: move,
+      });
+    },
+
+    send_position: function(position) {
+        return this.perform('send_position', {
+          position: position,
       });
     }
   });

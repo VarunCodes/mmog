@@ -2,10 +2,14 @@ function Board(xSize, ySize) {
   this.avatars = []
   this.xSize = xSize
   this.ySize = ySize
+  this.player;
 }
 
 Board.prototype.addAvatar = function(avatar) {
-  this.avatars.push(avatar)
+  var playerAvatar = this.avatars.find(function(avatar) {
+    return avatar.id == avatar.id
+  })
+  playerAvatar = this.player
 }
 Board.prototype.updateAvatars = function(avatars){
   this.avatars = avatars
