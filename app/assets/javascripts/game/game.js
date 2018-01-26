@@ -39,6 +39,9 @@ Game.prototype.applyCorrection = function(game) {
       player.speed = Math.sqrt(game.adjustment) * player.speed
     } else {
       player.speed = (2 - player.speed)/2 + player.speed
+      if(player.speed > 2) {
+        player.speed = 2
+      }
     }
   }
 }
