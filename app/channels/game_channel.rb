@@ -12,7 +12,7 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-  	$game.remove current_user.avatars[0].id
+  	# $game.remove current_user.avatars[0].id
     # Any cleanup needed when channel is unsubscribed
   end
 
@@ -21,13 +21,13 @@ class GameChannel < ApplicationCable::Channel
     # p params
     ActionCable.server.broadcast "game_channel", params.to_json
 
-    $game.send_move(data["move"])
+     $game.send_move(data["move"])
 
   end
 
   def send_position(data)
-     params = data['position'])
-     $game.send_position(params)
+    params = data['position']
+    $game.send_position(params)
     # avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
     # unless avatar
     # 	avatar = Avatar.new(params)

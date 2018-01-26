@@ -7,6 +7,7 @@ jQuery(document).on('turbolinks:load', function() {
       connected: function() {},
       disconnected: function() {},
       received: function(data) {
+        console.log(data)
         game.getUpdates(data)
       },
     send_move: function(move) {

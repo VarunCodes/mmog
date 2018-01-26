@@ -11,9 +11,9 @@ class ServerMasterGame
 
   	@context.eval("game = new Game(myChannel, null, myInterface)")
   	@game = @context[:game]
-  	# @context.eval('myplayer = new Avatar(500,500,"test",1,1); game.createPlayer(myplayer)')
+  	 # @context.eval('myplayer = new Avatar(500,500,"test",1,1); game.createPlayer(myplayer)')
   	start_main_timer
-  	start_broadcast_timer
+  	# start_broadcast_timer
 
   	
   end
@@ -24,14 +24,17 @@ class ServerMasterGame
   end
 
   def add (avatar)
+    p 'this'
+    p avatar
   	@context.eval("
   	  var newAvatar = new Avatar(
-  	  	#{avatar.xPos},#{avatar.xPos},
+  	  	#{avatar.xPos},#{avatar.yPos},
   	  	'#{avatar.name}',#{avatar.id},
   	   	40,'#{avatar.colour}'
   	  );
-  	  game.board.addAvatar(newAvatar);
+  	  game.board.avatars.push(newAvatar);
   	")
+    p @game.board.avatars
    end
 
   def remove (avatar_id)
@@ -61,18 +64,24 @@ class ServerMasterGame
   end
 
   def start_main_timer
-  	timer = Timer.new {@context.eval('tick(game)')}	
-  	timer.start(0.02)
+  	timer = Timer.new {
+      p 'tick'
+      p @game
+      p @game.board.avatars
+      p 'here'
+      @context.eval('tick(game)')
+    }	
+  	timer.start(0.2)
   end
 
   def start_broadcast_timer
-	timer = Timer.new {broadcast_all}
-  	timer.start(1)
+	timer2 = Timer.new {broadcast_all}
+  	timer2.start(1)
   end
 
   def broadcast_all
   	p 'broadcasting'
-  	ActionCable.server.broadcast "game_channel", @game.board.avatars.to_json
+  	ActionCable.server.broadcast "game_channel", @game.board.avatars.map{|avatar| avatar.to_h}.to_json
   end
 
 

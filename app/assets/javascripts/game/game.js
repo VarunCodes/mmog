@@ -10,6 +10,7 @@ function Game(channel, board, myinterface) {
 
 Game.prototype.getUpdates = function(data) {
   parsedData = JSON.parse(data)
+  console.log(parsedData)
   if(parsedData instanceof Array) {
     this.getGameState(parsedData)
   } else {
@@ -19,6 +20,7 @@ Game.prototype.getUpdates = function(data) {
 
 Game.prototype.getGameState = function(data) {
   avatars = []
+  console.log(data)
   for(i = 0; i < data.length; i++) {
   	avatars.push(new Avatar(
   		data[i]['xPos'],
@@ -29,7 +31,7 @@ Game.prototype.getGameState = function(data) {
   }
   this.board.updateAvatars(avatars)
   console.log(avatars)
-  console.log(this.board.avatars)
+  // console.log(this.board.avatars)
   this.board.addAvatar(this.board.player)
 }
 
@@ -38,8 +40,8 @@ Game.prototype.getMove = function(data) {
     return avatar.id == data['avatarID']
   })
   var keyCode = Object.keys(data)[0]
-  console.log(keyCode)
-  console.log(data)
+  // console.log(keyCode)
+  // console.log(data)
   determineKeyPress(avatarToMove, data[keyCode], keyCode)
 }
 
@@ -58,8 +60,8 @@ Game.prototype.sendPosition = function(player){
 }
 
 Game.prototype.sendMove = function(keyCode, change) {
-  console.log(game.board.player)
-  console.log(game.board.avatars)
+  // console.log(game.board.player)
+  // console.log(game.board.avatars)
   var move = {}
   move[keyCode] = change
   move['avatarID'] = this.board.player.id
@@ -135,5 +137,5 @@ determineKeyPress = function(myPlayer, change, keyCode) {
   } else if(keyCode == 40) {
     myPlayer.downPressed = change
     return keyCode
-  }
+  } else {return(0)}
 }
