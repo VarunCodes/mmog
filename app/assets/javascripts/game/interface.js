@@ -10,46 +10,53 @@ Interface.prototype.draw = function(board) {
   var context = canvas.getContext("2d")
   context.font = '30px Ariel'
   context.clearRect(0, 0, canvas.width, canvas.height)
-  for(var i=0;i<board.avatars.length;i++) {
+  for (var i = 0; i < board.avatars.length; i++) {
     var avatar = board.avatars[i]
     context.fillStyle = avatar.colour;
     context.beginPath();
-    context.arc(avatar.xPos, avatar.yPos, avatar.size, 0, 2*Math.PI);
+    context.arc(avatar.xPos, avatar.yPos, avatar.size, 0, 2 * Math.PI);
     context.closePath();
     context.fill();
     context.fillStyle = 'black'
-    context.fillText(avatar.name,avatar.xPos - 20, avatar.yPos)
+    context.fillText(avatar.name, avatar.xPos - 20, avatar.yPos)
   }
-}
+  for (var i = 0; i < board.viruses.length; i++) {
+    var virus = board.viruses[i];
+    context.beginPath();
+    context.arc(virus.x, virus.y, 3, 0, Math.PI * 2, false);
+    context.fillStyle = "rgb(" +
+      Math.floor(Math.random() * 256) + "," +
+      Math.floor(Math.random() * 256) + "," +
+      Math.floor(Math.random() * 256) + ")";
+    context.fill();
+  }
+};
 
 Interface.prototype.addKeyHandlers = function() {
   setupKeysHandlers(this)
 }
 
-// Interface.prototype.addEventListener = function(){
-//
-// }
 setupKeysHandlers = function(myinterface) {
   document.addEventListener('keydown', function() {
-    if(event.keyCode == 37) {
+    if (event.keyCode == 37) {
       myinterface.leftPressed = true
-    } else if(event.keyCode == 38) {
+    } else if (event.keyCode == 38) {
       myinterface.upPressed = true
-    } else if(event.keyCode == 39) {
+    } else if (event.keyCode == 39) {
       myinterface.rightPressed = true
-    } else if(event.keyCode == 40) {
+    } else if (event.keyCode == 40) {
       myinterface.downPressed = true
     }
   })
 
   document.addEventListener('keyup', function() {
-    if(event.keyCode == 37) {
+    if (event.keyCode == 37) {
       myinterface.leftPressed = false
-    } else if(event.keyCode == 38) {
+    } else if (event.keyCode == 38) {
       myinterface.upPressed = false
-    } else if(event.keyCode == 39) {
+    } else if (event.keyCode == 39) {
       myinterface.rightPressed = false
-    } else if(event.keyCode == 40) {
+    } else if (event.keyCode == 40) {
       myinterface.downPressed = false
     }
   })

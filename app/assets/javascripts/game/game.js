@@ -3,8 +3,8 @@ function Game(channel,board = new Board(1200,600), myinterface = new Interface()
   this.interface = myinterface
   this.interface.addKeyHandlers()
   this.channel = channel;
-  this.speed = 2
-
+  this.adjustment;
+  this.leashLength = 7;
 }
 
 Game.prototype.updateGameState = function(data) {
@@ -20,6 +20,28 @@ Game.prototype.updateGameState = function(data) {
   }
   this.board.updateAvatars(avatars)
   this.board.addAvatar(this.board.player)
+  this.applyCorrection(this)
+}
+
+Game.prototype.applyCorrection = function(game) {
+  var serverPlayer = game.board.avatars.find(function(avatar) {
+    return avatar.id == game.board.player.id;
+  });
+  if(serverPlayer) {
+    var index = game.board.avatars.indexOf(serverPlayer)
+    game.board.avatars.splice(index, 1)
+    var player = game.board.player
+    var xDiff = Math.abs(player.xPos - serverPlayer.xPos)
+    var yDiff = Math.abs(player.yPos - serverPlayer.yPos)
+    var diff = Math.sqrt((Math.pow(yDiff, 2)) + (Math.pow(xDiff, 2)))
+    if(diff > game.leashLength) {
+      game.adjustment = game.leashLength / diff
+      player.speed = game.adjustment * player.speed
+    } else {
+      player.speed = 2
+    }
+  }
+  console.log(game.board.player.speed)
 }
 
 Game.prototype.draw = function() {
@@ -38,30 +60,30 @@ Game.prototype.sendMov = function(){
 Game.prototype.movePlayer = function(){
 
   if (this.interface.leftPressed){
-  	this.board.move(-this.speed,0) 
+  	this.board.move(-this.board.player.speed,0)
   	this.sendMov()
   }
   if (this.interface.rightPressed){
-  	this.board.move(this.speed,0)
+  	this.board.move(this.board.player.speed,0)
   	this.sendMov()
   }
   if (this.interface.upPressed){
-  	this.board.move(0,-this.speed)
+  	this.board.move(0,-this.board.player.speed)
   	this.sendMov()
   }
   if (this.interface.downPressed){
-  	this.board.move(0,this.speed)
+  	this.board.move(0,this.board.player.speed)
   	this.sendMov()
   }
 }
 tick = function(game){
+  game.board.updateViruses();
 	game.movePlayer();
-	game.draw();	
+	game.draw();
 }
 
 Game.prototype.start = function(){
 	var game = this
+  game.board.addViruses();
 	setInterval(function(){tick(game)}, 20)
 }
-
-

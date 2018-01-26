@@ -5,6 +5,7 @@ function Avatar(xPos, yPos, name, id, size, colour = randomColour()) {
   this.size = size
   this.id = id
   this.colour = colour
+  this.speed = 2
 }
 
 Avatar.prototype.move = function(xCoord, yCoord) {
@@ -21,4 +22,3 @@ randomColour = function(){
   colours = ["yellow","red","blue","green","orange"]
   return colours[randomnum]
 }
-
