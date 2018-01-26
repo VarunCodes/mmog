@@ -4,7 +4,7 @@ function Game(channel,board = new Board(1200,600), myinterface = new Interface()
   this.interface.addKeyHandlers()
   this.channel = channel;
   this.adjustment;
-  this.leashLength = 7;
+  this.leashLength = 20;
 }
 
 Game.prototype.updateGameState = function(data) {
