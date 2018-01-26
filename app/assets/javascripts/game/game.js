@@ -4,7 +4,7 @@ function Game(channel,board = new Board(1200,600), myinterface = new Interface()
   this.interface.addKeyHandlers()
   this.channel = channel;
   this.adjustment;
-  this.leashLength = 20;
+  this.leashLength = 25;
 }
 
 Game.prototype.updateGameState = function(data) {
@@ -36,12 +36,11 @@ Game.prototype.applyCorrection = function(game) {
     var diff = Math.sqrt((Math.pow(yDiff, 2)) + (Math.pow(xDiff, 2)))
     if(diff > game.leashLength) {
       game.adjustment = game.leashLength / diff
-      player.speed = game.adjustment * player.speed
+      player.speed = Math.sqrt(game.adjustment) * player.speed
     } else {
-      player.speed = 2
+      player.speed = (2 - player.speed)/2 + player.speed
     }
   }
-  console.log(game.board.player.speed)
 }
 
 Game.prototype.draw = function() {
