@@ -2,7 +2,7 @@
 require_relative '../assets/Master/server_master_game'
 
 class GameChannel < ApplicationCable::Channel
-  
+
 
 
   def subscribed
@@ -18,24 +18,27 @@ class GameChannel < ApplicationCable::Channel
 
   def send_move(data)
   	params = JSON.parse(data["move"])
-  	# p $game.players
+    # p params
+    ActionCable.server.broadcast "game_channel", params.to_json
+
     $game.send_move(data["move"])
 
+  end
+
+  def send_position(data)
+     params = data['position'])
+     $game.send_position(params)
     # avatar = $game.players.select{|pavatar|pavatar.params[:id] == params['id']}
-    # p "avatar = " + avatar[0].to_s
     # unless avatar
     # 	avatar = Avatar.new(params)
-    # 	@game.players.push avatar
+    # 	$game.players.push avatar
     # 	avatar.save
     # end
-
-     # avatar[0].params[:xPos] = params['xPos']
-     # avatar[0].params[:yPos] = params['yPos']
-
-    # avatar.save
-    # p @game.players
-    # ActionCable.server.broadcast "game_channel", Avatar.all.to_json
-  end 
+    # avatar[0].params[:xPos] = params['xPos']
+    # avatar[0].params[:yPos] = params['yPos']
+    # avatar[0].params[:colour] = params['colour']
+    # p $game.players
+  end
 
 
 

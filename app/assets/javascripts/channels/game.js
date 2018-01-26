@@ -7,17 +7,24 @@ jQuery(document).on('turbolinks:load', function() {
       connected: function() {},
       disconnected: function() {},
       received: function(data) {
-        game.updateGameState(data)
+        game.getUpdates(data)
       },
     send_move: function(move) {
         return this.perform('send_move', {
           move: move,
+      });
+    },
+
+    send_position: function(position) {
+        return this.perform('send_position', {
+          position: position,
       });
     }
   });
 
   (function(){
     game = new Game(App_game_channel);
+    game.interface.addKeyHandlers()
     game.createPlayer(playerAvatar);
     game.draw();
     game.start();

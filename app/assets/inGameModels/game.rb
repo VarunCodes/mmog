@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require_relative 'timer'
 
 class Game 
@@ -6,6 +7,7 @@ class Game
   	@players = [] 
     timer = Timer.new {tick}
   	timer.start(0.02)
+
   end
   def send_move(move)
     p move
@@ -19,16 +21,19 @@ class Game
   end 
 
   def add avatar
+    p @players
     @players << PlayerAvatar.new({id: avatar.id, name: avatar.name, colour: avatar.colour, xPos: avatar.xPos, yPos: avatar.yPos })
   end
 
   def remove id
+    p @players
     @players.delete_if{|avatar|  avatar.params[:id] == id}
+    p @players
   end
 
   attr_accessor :players
 
-  
+
 private
   def tick
     ActionCable.server.broadcast "game_channel", @players.map{|player|player.params}.to_json
