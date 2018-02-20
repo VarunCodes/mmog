@@ -1,6 +1,8 @@
 # Strepkills
 Visit http://strepsils.herokuapp.com/game to play
+
 Join our chatroom [here](http://strepsils.herokuapp.com/)
+
 Current version: 1.0.0
 
 ### What is Strepkills?
@@ -30,15 +32,16 @@ $ rails s
 | [PostgreSQL](https://www.postgresql.org/) | Database of choice |
 | [RSpec](http://rspec.info/) | Testing framework for Ruby code |
 
-### Creation to release
+### Our approach
 
 * Keeping scalability in mind we created a game hub website, to easily host many different games in the future and to provide players with their individual profiles.
 * During the conception of the game our team decided to use the fewest number of pre-created frameworks as possible, and as a result we made an original game framework from scratch.
-* Our starting point was creating a chatroom using ActionCable to simultaenously send mesages to multiple users, and we applied the same methodology to our game.
+* Our starting point was creating a chatroom using ActionCable to simultaneously send messages between multiple users, and we applied the same methodology to our game.
 * As a result Strepkills incorporates WebSockets for seamless connections and after many iterations of improvements it is optimised for fast, responsive gameplay.  
 
 ### Our team
 [Keran](https://github.com/ker-an), [Rhys](https://github.com/rskyte), [Tim](https://github.com/Le5tes), [Varun](https://github.com/VarunCodes), [Xin](https://github.com/Xin00163)
+
 Honourary tester: Umair
 
 View our end-of-week presentation here- http://slides.com/rspecgod/strepsil-wars#/
